@@ -23,7 +23,7 @@ public class LinkController {
     @RequestMapping(value = "/index", method=RequestMethod.POST)
     public String addNewLink(LinkDto dto) {
         Link newLink = new Link();
-        newLink.setLink(dto.getLink());
+        newLink.setLong_link(dto.getLink());
         linkService.save(newLink);
         return "redirect:/";
     }
