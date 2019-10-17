@@ -1,25 +1,27 @@
 package com.shortUrl.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
-import javax.sql.DataSource;
 import java.util.List;
 
+@Service
 public class JdbcTemplateLinkDaoImpl implements ILinkDao {
 
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Override
-    public void setDataSource(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public void createItem(long id, String long_link, String short_link) {
-        String SQL = "INSERT INTO links (id, long_link, short_link) VALUES (?,?,?)";
+    public void createItem(String long_link, String short_link) {
+        String SQL = "INSERT INTO links (long_link, short_link) VALUES (?,?)";
 
-        jdbcTemplate.update(SQL, id, long_link, short_link);
-        System.out.println("Item successfully created.\nId: " + id + ";\nLong link: " +
+        jdbcTemplate.update(SQL,long_link, short_link);
+        System.out.println("Item successfully created.\nId: " + ";\nLong link: " +
                 long_link + ";\nShort link: " + short_link + "\n");
     }
 
@@ -28,6 +30,13 @@ public class JdbcTemplateLinkDaoImpl implements ILinkDao {
         String SQL = "SELECT * FROM links WHERE id = ?";
         Link link = (Link) jdbcTemplate.queryForObject(SQL, new Object[]{id}, new LinkMapper());
         return link;
+    }
+
+    @Override
+    public String getItemByLongLink(String long_link) {
+        String SQL = "SELECT * FROM links WHERE long_link = ?";
+        Link link = (Link) jdbcTemplate.queryForObject(SQL, new Object[]{long_link}, new LinkMapper());
+        return link.getShortLink();
     }
 
     @Override

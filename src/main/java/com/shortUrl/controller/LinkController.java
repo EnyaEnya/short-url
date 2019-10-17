@@ -1,30 +1,26 @@
 package com.shortUrl.controller;
 
-import com.shortUrl.domain.Link;
 import com.shortUrl.dto.LinkDto;
 import com.shortUrl.service.LinkService;
-import com.shortUrl.service.LinkServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class LinkController {
 
-    private LinkService linkService = new LinkServiceImpl();
+    @Autowired
+    private LinkService linkService;
 
     @GetMapping(value = "/")
     public String links() {
         return "index";
     }
 
-    @RequestMapping(value = "/index", method=RequestMethod.POST)
+    @PostMapping(value = "/reduce")
     public String addNewLink(LinkDto dto) {
-        Link newLink = new Link();
-        newLink.setLong_link(dto.getLink());
-        linkService.save(newLink);
+        linkService.save(dto.getLink());
         return "redirect:/";
     }
 

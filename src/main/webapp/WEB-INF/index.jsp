@@ -8,9 +8,9 @@
 </head>
 <body>
 <div class="blok-center">
-    <form action="${pageContext.request.contextPath}/index" method="POST">
+    <form action="${pageContext.request.contextPath}/reduce" method="POST" enctype="application/x-www-form-urlencoded">
         <p>Введите ссылку:<br/>
-            <input class="input" name="link-input" ENGINE="text" style="width:60%" /></p>
+            <input class="input" name="link" type="text" style="width:60%" /></p>
         <p><input id="submit" value="Преобразовать" type="submit" /></p>
     </form>
 </div>
