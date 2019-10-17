@@ -11,18 +11,20 @@ public class LinkServiceImpl implements LinkService {
     @Autowired
     private ILinkDao dao;
 
-    public void save(String longLink) {
-
+    @Override
+    public String save(String longLink) {
         String shortLink = createNewLink();
-
         dao.createItem(longLink, shortLink);
-
-
+        return shortLink;
     }
 
+    @Override
     public String createNewLink() {
         return RandomStringUtils.random(10, true, true);
     }
 
-
+    @Override
+    public String getLongLink(String shortLink) {
+        return dao.getLongLinkByShortLink(shortLink);
+    }
 }

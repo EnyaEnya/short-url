@@ -33,10 +33,10 @@ public class JdbcTemplateLinkDaoImpl implements ILinkDao {
     }
 
     @Override
-    public String getItemByLongLink(String long_link) {
-        String SQL = "SELECT * FROM links WHERE long_link = ?";
-        Link link = (Link) jdbcTemplate.queryForObject(SQL, new Object[]{long_link}, new LinkMapper());
-        return link.getShortLink();
+    public String getLongLinkByShortLink(String shortLink) {
+        String SQL = "SELECT * FROM links WHERE short_link = ?";
+        Link link = (Link) jdbcTemplate.queryForObject(SQL, new Object[]{shortLink}, new LinkMapper());
+        return link.getLongLink();
     }
 
     @Override

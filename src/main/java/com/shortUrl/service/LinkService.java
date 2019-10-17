@@ -2,7 +2,9 @@ package com.shortUrl.service;
 
 public interface LinkService {
 
-    void save(String link);
+    String save(String link);
 
     String createNewLink();
+
+    String getLongLink(String shortLink);
 }

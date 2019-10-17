@@ -8,7 +8,7 @@ public interface ILinkDao {
 
     public Link getItemById(long id);
 
-    public String getItemByLongLink(String long_link);
+    public String getLongLinkByShortLink(String long_link);
 
     public List listItems();
 
