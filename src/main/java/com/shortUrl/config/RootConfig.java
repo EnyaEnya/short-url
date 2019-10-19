@@ -1,5 +1,6 @@
 package com.shortUrl.config;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,6 +20,14 @@ public class RootConfig extends WebMvcConfigurerAdapter {
         dataSource.setUsername("postgres");
         dataSource.setPassword("postgres");
         return dataSource;
+    }
+
+    @Bean
+    public SpringLiquibase liquibase(DataSource dataSource) {
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setChangeLog("classpath:changelog.xml");
+        liquibase.setDataSource(dataSource);
+        return liquibase;
     }
 
     @Bean
