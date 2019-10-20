@@ -4,6 +4,7 @@ import com.shortUrl.domain.ILinkDao;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class LinkServiceImpl implements LinkService {
@@ -12,6 +13,7 @@ public class LinkServiceImpl implements LinkService {
     private ILinkDao dao;
 
     @Override
+    @Transactional
     public String save(String longLink) {
         String shortLink = createNewLink();
         dao.createItem(longLink, shortLink);
