@@ -14,4 +14,10 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="addIndex" author="Tatyana">
+        <createIndex tableName="links" indexName="short_link_idx">
+            <column name="short_link"/>
+        </createIndex>
+    </changeSet>
+
 </databaseChangeLog>
