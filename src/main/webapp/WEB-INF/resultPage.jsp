@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="blok-center">
-    <jsp:text> http://localhost:8080/${url} </jsp:text>
+    <jsp:text> http://localhost:8080/short-url-1.0/${url} </jsp:text>
 </div>
 </body>
 </html>
